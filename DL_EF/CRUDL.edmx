@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CRUDLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Libro">
+          <Key>
+            <PropertyRef Name="IdLibro" />
+          </Key>
+          <Property Name="IdLibro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="varchar(max)" />
+          <Property Name="Editorial" Type="varchar(max)" />
+          <Property Name="FechaPublicacion" Type="date" />
+          <Property Name="Genero" Type="varchar" MaxLength="20" />
+          <Property Name="NumPaginas" Type="int" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Stock" Type="int" />
+        </EntityType>
+        <Function Name="LibroDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdLibro" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LibrosAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Titulo" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Editorial" Type="varchar(max)" Mode="In" />
+          <Parameter Name="FechaPublicacion" Type="varchar" Mode="In" />
+          <Parameter Name="Genero" Type="varchar" Mode="In" />
+          <Parameter Name="NumPaginas" Type="int" Mode="In" />
+          <Parameter Name="Precio" Type="decimal" Mode="In" />
+          <Parameter Name="Stock" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LibrosGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="LibrosGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdLibro" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LibrosUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdLibro" Type="int" Mode="In" />
+          <Parameter Name="Titulo" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Editorial" Type="varchar(max)" Mode="In" />
+          <Parameter Name="FechaPublicacion" Type="varchar" Mode="In" />
+          <Parameter Name="Genero" Type="varchar" Mode="In" />
+          <Parameter Name="NumPaginas" Type="int" Mode="In" />
+          <Parameter Name="Precio" Type="decimal" Mode="In" />
+          <Parameter Name="Stock" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="CRUDLModelStoreContainer">
+          <EntitySet Name="Libro" EntityType="Self.Libro" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CRUDLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Libro">
+          <Key>
+            <PropertyRef Name="IdLibro" />
+          </Key>
+          <Property Name="IdLibro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Editorial" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaPublicacion" Type="DateTime" Precision="0" />
+          <Property Name="Genero" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NumPaginas" Type="Int32" />
+          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Stock" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="CRUDLEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Libro" EntityType="Self.Libro" />
+          <FunctionImport Name="LibroDelete">
+            <Parameter Name="IdLibro" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LibrosAdd">
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="Editorial" Mode="In" Type="String" />
+            <Parameter Name="FechaPublicacion" Mode="In" Type="String" />
+            <Parameter Name="Genero" Mode="In" Type="String" />
+            <Parameter Name="NumPaginas" Mode="In" Type="Int32" />
+            <Parameter Name="Precio" Mode="In" Type="Decimal" />
+            <Parameter Name="Stock" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LibrosGetAll" ReturnType="Collection(CRUDLModel.LibrosGetAll_Result)" />
+          <FunctionImport Name="LibrosGetById" ReturnType="Collection(CRUDLModel.LibrosGetById_Result)">
+            <Parameter Name="IdLibro" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LibrosUpdate">
+            <Parameter Name="IdLibro" Mode="In" Type="Int32" />
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="Editorial" Mode="In" Type="String" />
+            <Parameter Name="FechaPublicacion" Mode="In" Type="String" />
+            <Parameter Name="Genero" Mode="In" Type="String" />
+            <Parameter Name="NumPaginas" Mode="In" Type="Int32" />
+            <Parameter Name="Precio" Mode="In" Type="Decimal" />
+            <Parameter Name="Stock" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="LibrosGetAll_Result">
+          <Property Type="Int32" Name="IdLibro" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="true" />
+          <Property Type="String" Name="Editorial" Nullable="true" />
+          <Property Type="DateTime" Name="FechaPublicacion" Nullable="true" />
+          <Property Type="String" Name="Genero" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="NumPaginas" Nullable="true" />
+          <Property Type="Decimal" Name="Precio" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Int32" Name="Stock" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="LibrosGetById_Result">
+          <Property Type="Int32" Name="IdLibro" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="true" />
+          <Property Type="String" Name="Editorial" Nullable="true" />
+          <Property Type="DateTime" Name="FechaPublicacion" Nullable="true" />
+          <Property Type="String" Name="Genero" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="NumPaginas" Nullable="true" />
+          <Property Type="Decimal" Name="Precio" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Int32" Name="Stock" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CRUDLModelStoreContainer" CdmEntityContainer="CRUDLEntities">
+          <EntitySetMapping Name="Libro">
+            <EntityTypeMapping TypeName="CRUDLModel.Libro">
+              <MappingFragment StoreEntitySet="Libro">
+                <ScalarProperty Name="IdLibro" ColumnName="IdLibro" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Editorial" ColumnName="Editorial" />
+                <ScalarProperty Name="FechaPublicacion" ColumnName="FechaPublicacion" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="NumPaginas" ColumnName="NumPaginas" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="LibroDelete" FunctionName="CRUDLModel.Store.LibroDelete" />
+          <FunctionImportMapping FunctionImportName="LibrosAdd" FunctionName="CRUDLModel.Store.LibrosAdd" />
+          <FunctionImportMapping FunctionImportName="LibrosGetAll" FunctionName="CRUDLModel.Store.LibrosGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CRUDLModel.LibrosGetAll_Result">
+                <ScalarProperty Name="IdLibro" ColumnName="IdLibro" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Editorial" ColumnName="Editorial" />
+                <ScalarProperty Name="FechaPublicacion" ColumnName="FechaPublicacion" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="NumPaginas" ColumnName="NumPaginas" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LibrosGetById" FunctionName="CRUDLModel.Store.LibrosGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CRUDLModel.LibrosGetById_Result">
+                <ScalarProperty Name="IdLibro" ColumnName="IdLibro" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Editorial" ColumnName="Editorial" />
+                <ScalarProperty Name="FechaPublicacion" ColumnName="FechaPublicacion" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="NumPaginas" ColumnName="NumPaginas" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LibrosUpdate" FunctionName="CRUDLModel.Store.LibrosUpdate" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

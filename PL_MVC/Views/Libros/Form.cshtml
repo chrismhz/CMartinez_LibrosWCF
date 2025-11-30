@@ -1,0 +1,52 @@
+﻿@model ML.Libro
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2>Formulario para agregar un libro</h2>
+            <hr />
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                @using (Html.BeginForm("Form", "Libros", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @*@Html.LabelFor(model => model.IdLibro, new { @class = "form-label"})*@
+                    @Html.TextBoxFor(model => model.IdLibro, new { @class = "form-control", type = "hidden" })
+
+                    @Html.LabelFor(model => model.Titulo, new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Titulo, new { @class = "form-control" })
+
+                    @Html.LabelFor(model => model.Editorial, new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Editorial, new { @class = "form-control" })
+
+                    @Html.LabelFor(model => model.FechaPublicacion, new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.FechaPublicacion, new { @class = "form-control" })
+
+                    @Html.LabelFor(model => model.Genero, new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Genero, new { @class = "form-control" })
+
+                    @Html.LabelFor(model => model.NumPaginas, new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.NumPaginas, "{0:#.#}", new { @class = "form-control" })
+
+                    @Html.LabelFor(model => model.Precio, new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Precio, "{0:#.#}", new { @class = "form-control" })
+
+                    @Html.LabelFor(model => model.Stock, new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Stock, "{0:#.#}", new { @class = "form-control" })
+
+                    <br />
+
+                    <div>
+                        <button type="submit" class="btn btn-success">Registrar</button>
+                        @Html.ActionLink("Regresar", "GetAll", "Libros", new { @class = "btn btn-danger"})
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

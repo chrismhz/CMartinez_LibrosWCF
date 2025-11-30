@@ -1,0 +1,79 @@
+﻿<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+@model ML.Libro
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2>CRUD de Libros con WCF</h2>
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 text-center">
+            <a href="@Url.Action("Form","Libros")" class="btn btn-primary">
+                Agregar Libro 
+                <i class="bi bi-book"></i>
+            </a>
+            <hr />
+        </div>
+
+        <div class="table-responsive">
+            <br />
+            @if (Model.Libros != null)
+            {
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>IdLibro</th>
+                            <th>Titulo</th>
+                            <th>Editorial</th>
+                            <th>FechaPublicacion</th>
+                            <th>Genero</th>
+                            <th>NumeroPaginas</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (ML.Libro libro in Model.Libros)
+                        {
+                            <tr>
+                                <td>@libro.IdLibro</td>
+                                <td>@libro.Titulo</td>
+                                <td>@libro.Editorial</td>
+                                <td>@libro.FechaPublicacion</td>
+                                <td>@libro.Genero</td>
+                                <td>@libro.NumPaginas</td>
+                                <td>@libro.Precio</td>
+                                <td>@libro.Stock</td>
+                                <td>
+                                    <a class="btn btn-warning" href="@Url.Action("Form","Libros", new {IdLibro = libro.IdLibro})"><i class="bi bi-pencil-square"></i></a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-danger" href="@Url.Action("Delete","Libros", new{IdLibro = libro.IdLibro})"
+                                       onclick="return confirm('Desea eliminar este registro?')">
+                                        <i class="bi bi-file-x-fill"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+
+            }
+        </div>
+    </div>
+</div>
+
